@@ -1,8 +1,33 @@
-<div class="profile-container">
-  <h3 class="profile-name"><%= @user.name %></h3>
-  <%= attachment_image_tag @user, :profile_image,:fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
-  
-  <% if @user.id == current_user.id %>
-  <p><%= link_to "User info", edit_user_path(@user) %></p>
-  <% end %>
+<main>
+<div class="container  px-5 px-sm-0 mt-3">
+    <div class="row">
+    <%= render"books/user_info",user:@user,book:@book %> 
+    
+    <div class="col-md-8 offset-md-1">
+  <h2>Books</h2>
+  <table class="table table-hover table-inverse">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+   <% @books.each do |book| %>
+    <tr>
+
+   <td><%= attachment_image_tag book.user,:profile_image,:fill,40,40,fallback:"no_image.jpg",size:"40x40" %></td>
+
+   <td><%= link_to book.title,book_path(book) %></td>
+
+   <td><%= book.body %></td>
+   </tr>
+    <% end %>
+  </tbody>
+  </table>
+  </div>
 </div>
+</div>
+</main>
