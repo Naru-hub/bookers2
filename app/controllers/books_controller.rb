@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :baria_user, only: [:new]
+  before_action :baria_user, only: [:edit]
 
   def index
     @books = Book.all
@@ -58,7 +58,7 @@ class BooksController < ApplicationController
 
   def baria_user
     unless Book.find(params[:id]).user.id.to_i == current_user.id
-        redirect_to new_user_session_path(current_user)
+        redirect_to user_path(current_user)
     end
    end
 end
