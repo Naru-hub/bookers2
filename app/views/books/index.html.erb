@@ -12,7 +12,8 @@
               <th>Title</th>
               <th>Opinion</th>
               <th colspan="3"></th>
-            </tr>
+              <th colspan="3"></th>
+            </tr> 
         </thead>
         <tbody>
           <% @books.each do |book| %>
@@ -26,6 +27,7 @@
                <td><%= book.body %></td>
 
                <%= render 'books/favorite', book: book %>
+               <td>コメント数：<%= book.book_comments.count %></td>
 
              </tr>
           <% end %>
