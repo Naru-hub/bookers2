@@ -2,7 +2,8 @@ class BooksController < ApplicationController
   before_action :baria_user, only: [:edit]
 
   def index
-    @books = Book.all
+    @books = Book.all.includes(:favorited_users).sort {|a,b|b.favorited_users.size <=>
+    a.favorited_users.size}
     @user = current_user
     @book = Book.new
   end
