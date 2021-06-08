@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :followers, class_name: "User"
   has_many :favorited_books, through: :favorites, source: :book
 
+  has_many :group_users
+  has_many :groups, through: :group_users
+
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
   # 被フォロー関係を通じて参照→followed_idをフォローしている人
