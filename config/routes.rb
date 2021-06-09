@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   end
 
   resources :groups, except: [:destroy]
+  resources :chats, only: [:show, :create]
 
 end

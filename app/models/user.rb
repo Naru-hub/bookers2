@@ -13,6 +13,11 @@ class User < ApplicationRecord
   has_many :group_users
   has_many :groups, through: :group_users
 
+  has_many :user_rooms  #中間テーブル
+  has_many :chats
+  has_many :rooms, through: :user_rooms
+
+
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
   # 被フォロー関係を通じて参照→followed_idをフォローしている人
