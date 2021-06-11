@@ -10,6 +10,13 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
+  def join
+    @group = Group.find(params[:group_id])
+    @group.users << current_user
+    redirect_to groups_path
+  end
+
+
   def new
     @group = Group.new
   end
@@ -17,6 +24,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
+    @grop.users << current_user
     if @group.save
       redirect_to groups_path
     else
@@ -36,6 +44,24 @@ class GroupsController < ApplicationController
       render "edit"
     end
   end
+
+  def dstroy
+    @group = Group.find(params[:id])
+    @group.users.delete(current_user)
+    redirect_to group_path
+  end
+  
+  def new_mail
+    @group = Group.find(params[:group_id])
+  end
+  
+  def send_mail
+    @group = Group.find(paarams[:group_id])
+    group_users = @group.users
+    @title = params[: title]
+    @content = params[:content]
+    EventMailer.send_mail(group_users, @title, @content).deliver
+    
 
   private
 
